@@ -136,6 +136,26 @@ public class Slave {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Slave)) {
+            return false;
+        }
+
+        Slave other = (Slave) obj;
+
+        return this.uuid.equals(other.uuid);
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
+    }
+
+    @Override
     public String toString() {
         return String.format(
             "Slave{uuid='%s', name='%s', surname='%s', status='%s', exhaustion=%d, rebellion=%d}",
