@@ -20,11 +20,23 @@ public class Employee extends Slave {
         return employed;
     }
 
+    protected int getRebellionIncreaseAfterSalaryDecrease() {
+        return 25;
+    }
+
+    protected int getRebellionDecreaseAfterSalaryIncrease() {
+        return 15;
+    }
+
+    protected int getQuitRebellionThreshold() {
+        return 70;
+    }
+
     public void increaseSalary(double amount) {
         requireAlive();
 
         salary += amount;
-        reduceReadinessToRebel(15);
+        reduceReadinessToRebel(getRebellionDecreaseAfterSalaryIncrease());
 
         System.out.println("Salary increased by: " + amount);
     }
@@ -33,7 +45,7 @@ public class Employee extends Slave {
         requireAlive();
 
         salary = Math.max(0, salary - amount);
-        increaseReadinessToRebel(25);
+        increaseReadinessToRebel(getRebellionIncreaseAfterSalaryDecrease());
 
         System.out.println("Salary decreased by: " + amount);
     }
@@ -48,7 +60,7 @@ public class Employee extends Slave {
     }
 
     private boolean shouldQuit() {
-        return getLevelOfReadinessToRebel() >= 70 && RANDOM.nextBoolean();
+        return getLevelOfReadinessToRebel() >= getQuitRebellionThreshold() && RANDOM.nextBoolean();
     }
 
     private boolean checkIfQuits() {
@@ -99,8 +111,11 @@ public class Employee extends Slave {
 
     @Override
     public String toString() {
-        String employeeAsString = "Employee{%s, salary=%.2f, employed=%s}".formatted(super.toString(), salary, employed);
-
-        return employeeAsString;
+        return String.format(
+            "Employee{%s, salary=%.2f, employed=%s}",
+            super.toString(),
+            salary,
+            employed
+        );
     }
 }

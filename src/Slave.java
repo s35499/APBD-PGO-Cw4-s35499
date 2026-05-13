@@ -137,7 +137,8 @@ public class Slave {
 
     @Override
     public String toString() {
-        String slaveAsString = "Slave{uuid='%s', name='%s', surname='%s', status='%s', exhaustion=%d, rebellion=%d}".formatted(
+        return String.format(
+            "Slave{uuid='%s', name='%s', surname='%s', status='%s', exhaustion=%d, rebellion=%d}",
             uuid,
             name,
             surname,
@@ -145,7 +146,5 @@ public class Slave {
             levelOfExhaustion,
             levelOfReadinessToRebel
         );
-
-        return slaveAsString;
     }
 }

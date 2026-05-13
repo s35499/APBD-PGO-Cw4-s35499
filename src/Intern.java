@@ -12,8 +12,10 @@ public class Intern extends Slave {
 
     @Override
     public String toString() {
-        String internAsString = "Intern{%s, universityName='%s'}".formatted(super.toString(), universityName);
-
-        return internAsString;
+        return String.format(
+            "Intern{%s, universityName='%s'}",
+            super.toString(),
+            universityName
+        );
     }
 }
